@@ -1,0 +1,87 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no">
+<meta name="Author" content="我是谁并不重要_">
+<title>VBS脚本基础教程：编写及运行VBS代码 - 我是谁并不重要_</title>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/iconfont.js"></script>
+<script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
+<link rel="stylesheet" href="/css/css.css">
+<link rel="stylesheet" href="/css/iconfont.css">
+</head>
+<body>
+<div class="header sbar">
+    <div class="bg"></div>
+    <div class="head">
+        <div class="headLogo">
+            <a href="/" class="logo"><img src="/img/GoverLyr.jpg"></a> 
+            <span>我是谁并不重要_</span>
+            <a href="mailto:goverlyr@foxmail.com" class="mail">goverlyr@foxmail.com</a>
+        </div>
+        <div class="headLink head01"><a href="/"><span><i class="iconfont icon-index"></i>主页</span></a></div>
+        <!-- <div class="headLink head02"><a href="/archives"><span><i class="iconfont icon-archives"></i>归档</span></a></div> -->
+        <div class="headLink head03"><a href="/tags"><span><i class="iconfont icon-tags"></i>标签</span></a></div>
+        <div class="headLink head04"><a href="/categories"><span><i class="iconfont icon-categories"></i>分类</span></a></div>
+        <!-- <div class="headLink head05"><a href="/hots"><span><i class="iconfont icon-hots"></i>热门</span></a></div> -->
+        <div class="headTitle">手机游戏</div>
+        <div class="headLink head20"><a href="/方舟指令"><span><i class="iconfont icon-akod"></i>方舟指令</span></a></div>
+    </div>
+</div>
+<div class="content">
+    <div class="topTitle">
+        <div class="auto">
+            <div class="nav"><i class="iconfont icon-nav_on"></i></div>
+            <div class="column">VBS脚本基础教程：编写及运行VBS代码</div>
+        </div>
+    </div>
+    <div class="auto">
+        <div class="mHeight">
+            <div class="pageInfo sbar">
+    <div class="postCont">
+        <p>VBS是VBScript的简称，是由微软推出的一套基于Windows的脚本语言，该脚本无需编译成EXE的可执行文件。<br>个人感觉和bat挺像的。能够做挺多事情的。</p><p></p>
+
+<h2>创建VBS脚本文件</h2><p>其实挺简单的，是个文本编辑器都能创建。<br>最简单方法就是新建一个TXT文本，之后把文件后缀改成 .vbs 即可。<br>VBS的文件编码是GB2312的，使用UTF-8的话，中文会乱码。</p><p></p>
+
+<h2>VBS之Hello World！</h2><p>将以下代码复制到TXT文本，修改文本后缀即可运行啦。 (￣▽￣)／<br></p>
+
+<div class="codearea"><table><tbody><tr><td class="index"><pre>1<br>2<br>3<br></pre></td><td class="code"><pre>Dim str<br>str = "Hello World"<br>Msgbox(str)<br></pre></td></tr></tbody></table></div></p><p><p></p>
+
+<img src="http://wx1.sinaimg.cn/mw690/e02276a1ly1g2faccntfzj203w04cdft.jpg"></p><p><p></p>
+
+<h2>变量的定义与使用</h2><p>VBS存储数据的量分为常量和变量两种。<br>顾名思义，常量指在整个程序执行过程中保持不变的量，通常用于存储一些固定不变的数值。而变量则可以在程序执行过程中不断被改变的量，用于实现数据的读取和存储操作。</p><p></p>
+
+<h3>常量</h3><p>对于常量的定义，我们可以使用Const关键字来定义，例如：π<br></p>
+
+<div class="codearea"><table><tbody><tr><td class="index"><pre>1<br></pre></td><td class="code"><pre>const PI=3.1415926<br></pre></td></tr></tbody></table></div></p><p><p>按约定俗成的定义，常量全部使用大写字母来表示，以示区别。</p><p></p>
+
+<h3>变量</h3><p>通常可以使用DIM来定义变量，建议在定义变量的同时指定数据类型。由于VBS为非严格型变量定义，因此可以不指定数据类型，而由系统自己的识别。<br></p>
+
+<div class="codearea"><table><tbody><tr><td class="index"><pre>1<br>2<br>3<br>4<br></pre></td><td class="code"><pre>Dim i,j,k<br>i=3<br>j=4 <br>k=5<br></pre></td></tr></tbody></table></div></p><p><p></p>
+
+<h3>VBS输入框</h3><p>弹出输入框，可与用户进行交互。<br></p>
+
+<div class="codearea"><table><tbody><tr><td class="index"><pre>1<br>2<br>3<br></pre></td><td class="code"><pre>Dim name <br>name = Inputbox("请输入您的名字：")<br>Msgbox name<br></pre></td></tr></tbody></table></div></p><p><p></p>
+
+<img src="http://wx1.sinaimg.cn/mw690/e02276a1ly1g2fahbwrbaj20bn05kt8v.jpg"><p></p>
+
+<img src="http://wx1.sinaimg.cn/mw690/e02276a1ly1g2f9hom3tfj203w04cdfu.jpg"></p><p><p></p>
+
+<h3>VBS变量的定义及使用方法</h3><p>既然都了解了，那就试试吧，以下就具体来练习一下VBS变量的定义及使用方法：<br>输入如图所示的代码：<br></p>
+
+<div class="codearea"><table><tbody><tr><td class="index"><pre>1<br>2<br>3<br>4<br>5<br></pre></td><td class="code"><pre>const PI=3.1415926<br>Dim i,area<br>i=Inputbox("请输入圆的半径：")<br>area=PI*i*i<br>Msgbox "园的面积为："&area<br></pre></td></tr></tbody></table></div></p><p><p></p>
+
+<img src="http://wx1.sinaimg.cn/mw690/e02276a1ly1g2fa5rcn32j20bn05kwel.jpg"><p></p>
+
+<img src="http://wx1.sinaimg.cn/mw690/e02276a1ly1g2fa5ujmdrj204o04c74c.jpg"><p></p>
+    </div>
+</div>
+        </div>
+    </div>
+    <div class="rightcopy">我是谁并不重要_ © · 2016 - 2019 Power by <a href="https://goverlyr.github.io/" target="_blank">GoverLyr</a></div>
+</div>
+<script src="/js/script.js"></script>
+</body>
+</html>

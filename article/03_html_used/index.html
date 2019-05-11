@@ -1,0 +1,95 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no">
+<meta name="Author" content="我是谁并不重要_">
+<title>HTML常用代码 - 我是谁并不重要_</title>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/iconfont.js"></script>
+<script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
+<link rel="stylesheet" href="/css/css.css">
+<link rel="stylesheet" href="/css/iconfont.css">
+</head>
+<body>
+<div class="header sbar">
+    <div class="bg"></div>
+    <div class="head">
+        <div class="headLogo">
+            <a href="/" class="logo"><img src="/img/GoverLyr.jpg"></a> 
+            <span>我是谁并不重要_</span>
+            <a href="mailto:goverlyr@foxmail.com" class="mail">goverlyr@foxmail.com</a>
+        </div>
+        <div class="headLink head01"><a href="/"><span><i class="iconfont icon-index"></i>主页</span></a></div>
+        <!-- <div class="headLink head02"><a href="/archives"><span><i class="iconfont icon-archives"></i>归档</span></a></div> -->
+        <div class="headLink head03"><a href="/tags"><span><i class="iconfont icon-tags"></i>标签</span></a></div>
+        <div class="headLink head04"><a href="/categories"><span><i class="iconfont icon-categories"></i>分类</span></a></div>
+        <!-- <div class="headLink head05"><a href="/hots"><span><i class="iconfont icon-hots"></i>热门</span></a></div> -->
+        <div class="headTitle">手机游戏</div>
+        <div class="headLink head20"><a href="/方舟指令"><span><i class="iconfont icon-akod"></i>方舟指令</span></a></div>
+    </div>
+</div>
+<div class="content">
+    <div class="topTitle">
+        <div class="auto">
+            <div class="nav"><i class="iconfont icon-nav_on"></i></div>
+            <div class="column">HTML常用代码</div>
+        </div>
+    </div>
+    <div class="auto">
+        <div class="mHeight">
+            <div class="pageInfo sbar">
+    <div class="postCont">
+        <p></p>
+
+<h2>CSS</h2><p>简单的css样式。<br></p>
+
+<h3>单行文字溢出[…]</h3><p></p>
+
+<div>展示效果：</div><div style="text-overflow:ellipsis; overflow:hidden; white-space:nowrap; width:200px;">这是一段很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长的文字。</div><p></p>
+
+<div class="codearea"><table><tbody><tr><td class="index"><pre>1<br>2<br>3<br>4<br>5<br></pre></td><td class="code"><pre>.css{<br>text-overflow:ellipsis;<br>overflow:hidden;<br>white-space:nowrap;<br>}<br></pre></td></tr></tbody></table></div></p><p><p></p>
+
+<h3>多行文字溢出[…]</h3><p></p>
+
+<div>展示效果：</div><div style="text-overflow:ellipsis; overflow:hidden; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; width:200px;">这是一段很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长的文字。</div><p></p>
+
+<div class="codearea"><table><tbody><tr><td class="index"><pre>1<br>2<br>3<br>4<br>5<br>6<br>7<br></pre></td><td class="code"><pre>.css{<br>text-overflow:ellipsis;<br>overflow:hidden;<br>display:-webkit-box;<br>-webkit-line-clamp:2;<br>-webkit-box-orient:vertical;<br>}<br></pre></td></tr></tbody></table></div></p><p><p></p>
+
+<h3>英文首字母大写</h3><p></p>
+
+<div class="codearea"><table><tbody><tr><td class="index"><pre>1<br>2<br>3<br></pre></td><td class="code"><pre>.css{<br>text-transform:capitalize;<br>}<br></pre></td></tr></tbody></table></div></p><p><p></p>
+
+<h3>英文全部字母大写</h3><p></p>
+
+<div class="codearea"><table><tbody><tr><td class="index"><pre>1<br>2<br>3<br></pre></td><td class="code"><pre>.css{<br>text-transform:Uppercase;<br>}<br></pre></td></tr></tbody></table></div></p><p><p></p>
+
+<h3>英文全部字母小写</h3><p></p>
+
+<div class="codearea"><table><tbody><tr><td class="index"><pre>1<br>2<br>3<br></pre></td><td class="code"><pre>.css{<br>text-transform:lowercase;<br>}<br></pre></td></tr></tbody></table></div></p><p><p></p>
+
+<h2>HTML</h2><p></p>
+
+<h3>Viewport</h3><p>width：控制 viewport 的宽度，可以指定的一个值，如 600，或者特殊的值，如 device-width 为设备的宽度。<br>initial-scale：初始缩放比例，也即是当页面第一次加载的时候缩放比例。<br>maximum-scale：允许用户缩放到的最大比例。<br>minimum-scale：允许用户缩放到的最小比例。<br>user-scalable：用户是否可以手动缩放。<br></p>
+
+<div class="codearea"><table><tbody><tr><td class="index"><pre>1<br></pre></td><td class="code"><pre>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"&gt;<br></pre></td></tr></tbody></table></div></p><p><p></p>
+
+<h3>input行内事件</h3><p>onkeyup：事件会在键盘按键被松开时发生。<br>onkeydown：事件会在用户按下一个键盘按键时发生。<br>onfocus：事件在对象获得焦点时发生。<br>onblur：事件会在对象失去焦点时发生。<br></p>
+
+<div class="codearea"><table><tbody><tr><td class="index"><pre>1<br>2<br>3<br>4<br></pre></td><td class="code"><pre>&lt;input type="text" onkeyup="console.log('松开了键盘')"&gt;<br>&lt;input type="text" onkeydown="console.log('按下了键盘')"&gt;<br>&lt;input type="text" onfocus="console.log('光标进入了输入框，内容：'+this.value)" value="value"&gt;<br>&lt;input type="text" onblur="console.log('光标离开了输入框，内容：'+this.value)"&gt;<br></pre></td></tr></tbody></table></div></p><p><p></p>
+
+</p><p><p></p>
+
+<h2>前端JQuery插件官网</h2><p></p>
+
+<h3>[【大话主席-SuperSlide】](http://www.superslide2.com/)</h3><p></p>
+    </div>
+</div>
+        </div>
+    </div>
+    <div class="rightcopy">我是谁并不重要_ © · 2016 - 2019 Power by <a href="https://goverlyr.github.io/" target="_blank">GoverLyr</a></div>
+</div>
+<script src="/js/script.js"></script>
+</body>
+</html>
