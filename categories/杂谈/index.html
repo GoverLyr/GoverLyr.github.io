@@ -41,7 +41,7 @@
         <div class="mHeight">
             <div class="tagClass">
     <div class="box toggle">
-    <a  href="/categories">全部</a><a class=on href="/categories/杂谈">杂谈</a><a  href="/categories/互联网">互联网</a>
+    <a  href="/categories">全部</a><a class="on" href="/categories/杂谈">杂谈</a><a  href="/categories/互联网">互联网</a>
     <div class="icon"><i class="iconfont icon-more"></i></div>
 </div>
 <script>
@@ -50,28 +50,37 @@ $(".tagClass .icon").click(function(){
 });
 </script>
 </div>
-<div class="newsList" id="homeList">
-    <dl>
-        <dd v-for="(list,index) in  GoverList" v-cloak>
-            <div class="box">
-                <div class="pic" v-if="list.img != ''">
-                    <a :href="'/article/' + list.link"><img :src="list.img" :alt="list.title" onload="pic(this)"></a>
+<div id="cateList">
+    <div class="newsList">
+        <dl>
+            <dd v-for="(list,index) in  GoverList" v-cloak>
+                <div class="box">
+                    <div class="pic" v-if="list.img != ''">
+                        <a :href="'/article/' + list.link"><img :src="list.img" :alt="list.title" onload="pic(this)"></a>
+                    </div>
+                    <div class="info">
+                        <span>{{list.date}}</span>
+                        <h3><a :href="'/article/' + list.link">{{list.title}}</a></h3>
+                        <h5><a :href="'/article/' + list.link">{{list.info}}</a></h5>
+                    </div>
                 </div>
-                <div class="info">
-                    <span>{{list.date}}</span>
-                    <h3><a :href="'/article/' + list.link">{{list.title}}</a></h3>
-                    <h5><a :href="'/article/' + list.link">{{list.info}}</a></h5>
-                </div>
-            </div>
-        </dd>
-        <dt></dt>
-    </dl>
+            </dd>
+            <dt></dt>
+        </dl>
+    </div>
+    <div class="pageNum" v-if="page!=1">
+        <a href="javascript:;" v-on:click="pagebefore()">首页</a>
+        <a href="javascript:;" v-on:click="pageprev()">上一页</a>
+        <a href="javascript:;" class="pagNumber" :class="{'on':pageon == index}" v-for="index in page" v-cloak v-on:click="pagennn(index)" v-if="isshow(index)">{{index}}</a>
+        <a href="javascript:;" v-on:click="pagenext()">下一页</a>
+        <a href="javascript:;" v-on:click="pageafter()">末页</a>
+    </div>
 </div>
 <script>
-    new Vue({
-        el:'#homeList',
-        data:{
-            list:[{
+new Vue({
+    el:'#cateList',
+    data:{
+        list:[{
 link:"01_hello_world",
 title:"Hello World！",
 date:"2019-04-03",
@@ -125,29 +134,79 @@ categories:{
 }
 }
 ,],
-            categories:"杂谈"
+        categories:"杂谈",
+        before:1,
+        after:10,
+        pagesize:10,
+        pageon:1,
+        page:0,
+        pagennn:function(index){
+            this.pageon = index;
         },
-        computed:{
-            GoverList:function(){
-                var _t = this
-                this.list.sort(function(a,b){
-                    var x = a['date'];
-                    var y = b['date'];
-                    return((x>y)?-1:((x<y)?1:0));
-                });
-                return this.list.filter(function(item,index){
-                    if(index>=0 && index <=9){
-                        for(var j in item.categories){
-                            if(_t.categories==j || _t.categories==""){
-                                return item;
-                            };
+        pageprev:function(){
+            if(!(this.pageon-1 < 1)){
+                this.pageon--;
+            };
+        },
+        pagenext:function(){
+            if(!(this.pageon+1> this.page)){
+                this.pageon++;
+            };
+        },
+        pagebefore:function(){
+            this.pageon = 1;
+        },
+        pageafter:function(){
+            this.pageon = this.page;
+        },
+        isshow:function(index){
+            if((this.pageon+3)>this.page){
+                if(index>this.page-5){
+                    return true;
+                };
+            }else if((this.pageon-3)<0){
+                console.log(index)
+                if(index<=5){
+                    return true;
+                };
+            }else{
+                if(index < this.pageon+3 && index > this.pageon-3){
+                    return true;
+                };
+            };
+        }
+    },
+    computed:{
+        GoverList:function(){
+            var _t = this
+            this.list.sort(function(a,b){
+                var x = a['date'];
+                var y = b['date'];
+                return((x>y)?-1:((x<y)?1:0));
+            });
+            var s = 0;
+            return this.list.filter(function(item,index){
+                for(var j in item.categories){
+                    if(_t.categories==j || _t.categories==""){
+                        s++;
+                        _t.page = Math.ceil(s/_t.pagesize);
+                        if(s>=_t.before && s <=_t.after){
+                            return item;
                         };
                     };
-                });
-            }
+                };
+            });
         }
-    });
-    </script>
+    },
+    watch:{
+        pageon:function(){
+            this.before = 1 + ((this.pageon-1) * this.pagesize);
+            this.after = this.pagesize + ((this.pageon-1) * this.pagesize);
+            window.scrollTo(0,0);
+        }
+    }
+});
+</script>
         </div>
     </div>
     <div class="rightcopy">我是谁并不重要_ © · 2016 - 2019 Power by <a href="https://goverlyr.github.io/" target="_blank">GoverLyr</a></div>

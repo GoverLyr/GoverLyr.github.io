@@ -96,13 +96,11 @@ body{ background-color:#fafbfc;}
 .pageInfo .postCont .codearea .index pre{ color:#727272; font-size:0.85em; text-align:right; padding-right:20px;}
 .pageInfo .postCont a{ text-decoration:underline; color:#3f51b5;}
 
-.pageNum{ padding:20px 0; font-size:0; text-align:center;}
-.pageNum a,
-.pageNum span{ display:inline-block; font-size:14px; line-height:28px; height:28px; min-width:28px; margin:0 5px; border:1px solid #ccc; box-sizing:border-box; padding:0 10px; cursor:pointer; color:#333; border-radius:3px; transition:all 0.3s;}
-.pageNum .page-number{ padding:0 5px;}
-.pageNum a:hover,
-.pageNum span:hover{ background:#eee;}
-.pageNum span.current{ background:#3f51b5; color:#fff; border-color:#3f51b5;}
+.pageNum{ padding:20px 0; font-size:0; text-align:center; line-height:0;}
+.pageNum .pagNumber{ padding:0 3px;}
+.pageNum a{ display:inline-block; font-size:14px; line-height:26px; height:28px; min-width:28px; margin:0 5px; border:1px solid #ccc; box-sizing:border-box; padding:0 10px; cursor:pointer; color:#333; border-radius:3px; transition:all 0.3s;}
+.pageNum a:hover{ background:#eee;}
+.pageNum a.on{ background:#3f51b5; color:#fff; border-color:#3f51b5;}
 
 .tagClass{ text-align:justify; overflow:hidden; font-size:0;}
 .tagClass .box{ margin:-5px; position:relative;}

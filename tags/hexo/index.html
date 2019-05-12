@@ -41,7 +41,7 @@
         <div class="mHeight">
             <div class="tagClass">
     <div class="box toggle">
-    <a  href="/tags">全部</a><a  href="/tags/杂谈">杂谈</a><a class=on href="/tags/hexo">hexo</a><a  href="/tags/html">html</a><a  href="/tags/vbs">vbs</a><a  href="/tags/脚本">脚本</a>
+    <a  href="/tags">全部</a><a  href="/tags/杂谈">杂谈</a><a class="on" href="/tags/hexo">hexo</a><a  href="/tags/html">html</a><a  href="/tags/vbs">vbs</a><a  href="/tags/脚本">脚本</a>
     <div class="icon"><i class="iconfont icon-more"></i></div>
 </div>
 <script>
@@ -50,26 +50,35 @@ $(".tagClass .icon").click(function(){
 });
 </script>
 </div>
-<div class="newsList" id="homeList">
-    <dl>
-        <dd v-for="(list,index) in  GoverList" v-cloak>
-            <div class="box">
-                <div class="pic" v-if="list.img != ''">
-                    <a :href="'/article/' + list.link"><img :src="list.img" :alt="list.title" onload="pic(this)"></a>
+<div id="tagsList">
+    <div class="newsList">
+        <dl>
+            <dd v-for="(list,index) in  GoverList" v-cloak>
+                <div class="box">
+                    <div class="pic" v-if="list.img != ''">
+                        <a :href="'/article/' + list.link"><img :src="list.img" :alt="list.title" onload="pic(this)"></a>
+                    </div>
+                    <div class="info">
+                        <span>{{list.date}}</span>
+                        <h3><a :href="'/article/' + list.link">{{list.title}}</a></h3>
+                        <h5><a :href="'/article/' + list.link">{{list.info}}</a></h5>
+                    </div>
                 </div>
-                <div class="info">
-                    <span>{{list.date}}</span>
-                    <h3><a :href="'/article/' + list.link">{{list.title}}</a></h3>
-                    <h5><a :href="'/article/' + list.link">{{list.info}}</a></h5>
-                </div>
-            </div>
-        </dd>
-        <dt></dt>
-    </dl>
+            </dd>
+            <dt></dt>
+        </dl>
+    </div>
+    <div class="pageNum" v-if="page!=1">
+        <a href="javascript:;" v-on:click="pagebefore()">首页</a>
+        <a href="javascript:;" v-on:click="pageprev()">上一页</a>
+        <a href="javascript:;" class="pagNumber" :class="{'on':pageon == index}" v-for="index in page" v-cloak v-on:click="pagennn(index)" v-if="isshow(index)">{{index}}</a>
+        <a href="javascript:;" v-on:click="pagenext()">下一页</a>
+        <a href="javascript:;" v-on:click="pageafter()">末页</a>
+    </div>
 </div>
 <script>
 new Vue({
-    el:'#homeList',
+    el:'#tagsList',
     data:{
         list:[{
 link:"01_hello_world",
@@ -125,7 +134,47 @@ categories:{
 }
 }
 ,],
-        tags:"hexo"
+        tags:"hexo",
+        before:1,
+        after:10,
+        pagesize:10,
+        pageon:1,
+        page:0,
+        pagennn:function(index){
+            this.pageon = index;
+        },
+        pageprev:function(){
+            if(!(this.pageon-1 < 1)){
+                this.pageon--;
+            };
+        },
+        pagenext:function(){
+            if(!(this.pageon+1> this.page)){
+                this.pageon++;
+            };
+        },
+        pagebefore:function(){
+            this.pageon = 1;
+        },
+        pageafter:function(){
+            this.pageon = this.page;
+        },
+        isshow:function(index){
+            if((this.pageon+3)>this.page){
+                if(index>this.page-5){
+                    return true;
+                };
+            }else if((this.pageon-3)<0){
+                console.log(index)
+                if(index<=5){
+                    return true;
+                };
+            }else{
+                if(index < this.pageon+3 && index > this.pageon-3){
+                    return true;
+                };
+            };
+        }
     },
     computed:{
         GoverList:function(){
@@ -135,16 +184,28 @@ categories:{
                 var y = b['date'];
                 return((x>y)?-1:((x<y)?1:0));
             });
+            var s = 0;
             return this.list.filter(function(item,index){
-                if(index>=0 && index <=9){
-                    for(var j in item.tags){
-                        if(_t.tags==j || _t.tags==""){
-                            console.log(index)
+                for(var j in item.tags){
+                    if(_t.tags==j || _t.tags==""){
+                        s++;
+                        _t.page = Math.ceil(s/_t.pagesize);
+                        console.log(s)
+                        // console.log(_t.pagesize)
+                        // console.log(_t.page)
+                        if(s>=_t.before && s <=_t.after){
                             return item;
                         };
                     };
                 };
             });
+        }
+    },
+    watch:{
+        pageon:function(){
+            this.before = 1 + ((this.pageon-1) * this.pagesize);
+            this.after = this.pagesize + ((this.pageon-1) * this.pagesize);
+            window.scrollTo(0,0);
         }
     }
 });
