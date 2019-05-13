@@ -9,6 +9,7 @@
 <script src="/js/jquery.min.js"></script>
 <script src="/js/iconfont.js"></script>
 <script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 <link rel="stylesheet" href="/css/css.css">
 <link rel="stylesheet" href="/css/iconfont.css">
 </head>
@@ -39,13 +40,12 @@
     </div>
     <div class="auto">
         <div class="mHeight">
-            <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<div class="pageInfo sbar">
+            <div class="pageInfo sbar">
     <div class="postCont postContAll">
         <div class="postTac">
             <i class="iconfont icon-time"></i>2019-05-13
             <span id="busuanzi_container_page_pv">
-                <i class="iconfont icon-count"></i><span id="busuanzi_value_page_pv"></span>
+                <i class="iconfont icon-count"></i><span id="busuanzi_value_page_pv">0</span>
             </span>
         </div>
         <p>废话也不多说了，直接上代码。<br></p>
@@ -59,7 +59,6 @@
 <div class="codearea"><table><tbody><tr><td class="index"><pre>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br>17<br>18<br>19<br>20<br>21<br>22<br>23<br>24<br>25<br>26<br>27<br></pre></td><td class="code"><pre>Set fso = WScript.CreateObject("Scripting.Filesystemobject")<br>Sub CreateFile(FileUrl,Msg)<br>    Set stm = CreateObject("ADODB.Stream")<br>    stm.Type = 2<br>    stm.Open<br>    stm.Charset = "UTF-8"<br>    stm.Position = stm.Size<br>    stm.WriteText Msg<br>    Dim FolderArray,Folder<br>    FileUrl = Replace(FileUrl,"/","\")<br>    FolderArray = Split(FileUrl, "\")<br>    If UBound(FolderArray) &lt;&gt; 0 Then<br>        For i = 0 To UBound(FolderArray)-1<br>            Folder = Folder & FolderArray(i)<br>            If fso.folderExists(Folder) = flase Then<br>                fso.createfolder (Folder)<br>            End If<br>            Folder = Folder & "\"<br>        Next<br>    End If<br>    stm.SaveToFile FileUrl, 2<br>    stm.Close<br>    set stm = nothing<br>End Sub<br><br>call CreateFile("01.txt","文本信息")<br>call CreateFile("D:\txt\02.txt","文本信息")<br></pre></td></tr></tbody></table></div><p></p>
     </div>
 </div>
-
         </div>
     </div>
     <div class="rightcopy">我是谁并不重要_ © · 2016 - 2019 Power by <a href="https://goverlyr.github.io/" target="_blank">GoverLyr</a></div>
