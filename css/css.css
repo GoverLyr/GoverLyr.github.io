@@ -102,6 +102,10 @@ body{ background-color:#fafbfc;}
 .pageNum a:hover{ background:#eee;}
 .pageNum a.on{ background:#3f51b5; color:#fff; border-color:#3f51b5;}
 
+.postTac{ border-bottom:1px solid #ddd; font-size:16px; line-height:30px; padding-bottom:10px;}
+.postTac .iconfont{ margin-right:5px; font-size:18px;}
+.postTac .iconfont.icon-count{ margin-left:15px;}
+
 .tagClass{ text-align:justify; overflow:hidden; font-size:0;}
 .tagClass .box{ margin:-5px; position:relative;}
 .tagClass .box.toggle{height:42px; overflow:hidden; padding-right:40px; }
