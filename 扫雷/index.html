@@ -1,0 +1,224 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no">
+<meta name="Author" content="我是谁并不重要_">
+<title>扫雷 - 我是谁并不重要_</title>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/iconfont.js"></script>
+<script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<link rel="stylesheet" href="/css/css.css">
+<link rel="stylesheet" href="/css/iconfont.css">
+</head>
+<body>
+<div class="header sbar">
+    <div class="bg"></div>
+    <div class="head">
+        <div class="headLogo">
+            <a href="/" class="logo"><img src="/img/GoverLyr.jpg"></a> 
+            <span>我是谁并不重要_</span>
+            <a href="mailto:goverlyr@foxmail.com" class="mail">goverlyr@foxmail.com</a>
+        </div>
+        <div class="headLink head01"><a href="/"><span><i class="iconfont icon-index"></i>主页</span></a></div>
+        <!-- <div class="headLink head02"><a href="/archives"><span><i class="iconfont icon-archives"></i>归档</span></a></div> -->
+        <div class="headLink head03"><a href="/tags"><span><i class="iconfont icon-tags"></i>标签</span></a></div>
+        <div class="headLink head04"><a href="/categories"><span><i class="iconfont icon-categories"></i>分类</span></a></div>
+        <!-- <div class="headLink head05"><a href="/hots"><span><i class="iconfont icon-hots"></i>热门</span></a></div> -->
+        <div class="headTitle">游戏</div>
+        <div class="headLink head20"><a href="/方舟指令"><span><i class="iconfont icon-akod"></i>方舟指令</span></a></div>
+        <div class="headLink on"><a href="/扫雷"><span><i class="iconfont icon-baozha"></i>扫雷</span></a></div>
+    </div>
+</div>
+<div class="content">
+    <div class="topTitle">
+        <div class="auto">
+            <div class="nav"><i class="iconfont icon-nav_on"></i></div>
+            <div class="column">扫雷</div>
+        </div>
+    </div>
+    <div class="auto">
+        <div class="mHeight">
+            <div class="pageInfo">
+	<div class="postCont postContAll">
+		<div class="postTac" style="display:none;">
+			<span id="busuanzi_container_page_pv">
+				<i class="iconfont icon-count"></i><span id="busuanzi_value_page_pv">0</span>
+			</span>
+		</div>
+		<div class="saolei">
+			<div class="title">
+				<div>地雷：<span id="sl-data">99</span>个</div>
+				<div>时间：<span id="sl-time">0</span>秒</div>
+			</div>
+			<div class="show">
+				<div class="flex">
+					<div id="sl-click"></div>
+				</div>
+			</div>
+			<div class="box"></div>
+		</div>
+		<style>
+			.saolei{ margin: 0 auto; padding: 30px 0; position: relative;}
+			.saolei .title{ font-size: 18px; padding-bottom: 15px; display: flex; justify-content: space-between; line-height: 30px;}
+			.saolei .title span{ color: red;}
+			.saolei .show{ display: none;}
+			.saolei .show .flex{ position: absolute; left: 0; right: 0; top: 75px; bottom: 30px; display: flex; align-items: center; z-index: 1; background: rgba(0,0,0,0.3); color: #fff;}
+			.saolei .show #sl-click{ width: 150px; background: #fff; border-radius: 5px; text-align: center; line-height: 45px; color: #333; margin: 0 auto; cursor: pointer;}
+			.saolei .show #sl-click span{ width: 150px; display: block;}
+			.saolei .box{ border: 1px solid #ddd; overflow: hidden; margin: 0 auto; cursor: pointer; user-select: none;}
+			.saolei .box div{width: 35px; height: 35px; line-height: 35px; font-size: 18px; background: #999; border: 1px solid #ddd; float: left; text-align: center; color: #3f51b5; font-weight: bold;}
+			.saolei .box div .iconfont{ font-size: 20px; font-weight: 100;}
+			.saolei .box .bj{ color: #fff;}
+			.saolei .box .yw{ color: #fff;}
+			.saolei .box .cl{ background: #eee;}
+			.saolei .box .on{ background: #eee; color: #333 !important;}
+			.saolei .box .bz{ background: red; color: #fff !important;}
+			.saolei .box .yes{ background: green; color: #fff !important;}
+		</style>
+		<script>
+			var hang = 30;
+			var lie = 16;
+			var lei = 99;
+			var zongshu = hang * lie;
+			var gotime;
+			$(".saolei").width(hang * 37 +2)
+			function strGame(){
+				$(".saolei .title #sl-data").html(lei);
+				$(".saolei .box").html("");
+				for (var i=0;i<lie;i++){
+					for (var j=0;j<hang;j++){
+						$(".saolei .box").append("<div x='"+ (i+1) +"' y='"+ (j+1) +"'></div>");
+					}
+				};
+				var kaishi=true;
+				var jieshu=true;
+				var shuju = new Array;
+				function RndNum(index) {
+					var arr = [];
+					for (var i = 1; i <=zongshu; i++) {
+						if(i!=index){
+							arr.push(i);
+						}
+					}
+					arr.sort(
+						function () {
+							return 0.5 - Math.random();
+						}
+					);
+					return arr.slice(0,lei)
+				};
+				function jishuqi(obj){
+					$(obj).attr("date",(parseInt($(obj).attr("date")?$(obj).attr("date"):0)+1));
+				};
+				function clickThis(obj){
+					if(!$(obj).hasClass("cl") && $(obj).length==1 && $(obj).find("i").length==0){
+						$(obj).removeClass().addClass("cl").text($(obj).attr("date"));
+						$(".saolei .title #sl-data").html(lei - $(".saolei .box .bj").length);
+						if(zongshu == lei + $(".saolei .box .cl").length && jieshu){
+							$(".saolei .show").fadeIn()
+							$("#sl-click").html("游戏胜利！")
+							clearTimeout(gotime);
+							jieshu = false;
+						};
+						if(!$(obj).attr("date")){
+							var x = parseInt($(obj).attr("x"));
+							var y = parseInt($(obj).attr("y"));
+							
+							clickThis($(".saolei .box [x='"+(x-1)+"'][y='"+(y-1)+"']"));
+							clickThis($(".saolei .box [x='"+( x )+"'][y='"+(y-1)+"']"));
+							clickThis($(".saolei .box [x='"+(x+1)+"'][y='"+(y-1)+"']"));
+
+							clickThis($(".saolei .box [x='"+(x-1)+"'][y='"+( y )+"']"));
+							clickThis($(".saolei .box [x='"+(x+1)+"'][y='"+( y )+"']"));
+							
+							clickThis($(".saolei .box [x='"+(x-1)+"'][y='"+(y+1)+"']"));
+							clickThis($(".saolei .box [x='"+( x )+"'][y='"+(y+1)+"']"));
+							clickThis($(".saolei .box [x='"+(x+1)+"'][y='"+(y+1)+"']"));
+						};
+					};
+				};
+				$(".saolei .box div").click(function(){
+					if(kaishi){
+						kaishi = !kaishi;
+						shuju=RndNum($(this).index());
+						for (var i=0;i<lei;i++){
+							var x = parseInt($(".saolei .box div").eq(shuju[i]).attr("x"));
+							var y = parseInt($(".saolei .box div").eq(shuju[i]).attr("y"));
+							
+							jishuqi($(".saolei .box [x='"+(x-1)+"'][y='"+(y-1)+"']"));
+							jishuqi($(".saolei .box [x='"+( x )+"'][y='"+(y-1)+"']"));
+							jishuqi($(".saolei .box [x='"+(x+1)+"'][y='"+(y-1)+"']"));
+
+							jishuqi($(".saolei .box [x='"+(x-1)+"'][y='"+( y )+"']"));
+							jishuqi($(".saolei .box [x='"+(x+1)+"'][y='"+( y )+"']"));
+							
+							jishuqi($(".saolei .box [x='"+(x-1)+"'][y='"+(y+1)+"']"));
+							jishuqi($(".saolei .box [x='"+( x )+"'][y='"+(y+1)+"']"));
+							jishuqi($(".saolei .box [x='"+(x+1)+"'][y='"+(y+1)+"']"));
+							
+							$(".saolei .box div").eq(shuju[i]).click(function(){
+								if(!$(this).hasClass("bj") && ! $(this).hasClass("yw")){
+									$(this).addClass("on").addClass("bz");
+									for (var v=0;v<lei;v++){
+										var _this=$(".saolei .box div").eq(shuju[v]);
+										_this.addClass("on");
+										if(_this.find(".iconfont").length==0){
+											_this.html('<i class="iconfont icon-baozha"></i>');
+										}else{
+											_this.addClass("yes");
+										};
+									}
+									$(".icon-qizhi").each(function(){
+										$(this).parent().addClass($(this).parent().hasClass("yes")?"":"bz")
+									})
+									jieshu = false;
+									$(".saolei .show").fadeIn();
+									$("#sl-click").html("游戏结束！");
+									clearTimeout(gotime);
+								};
+								return false;
+							})
+						};
+						gotime = setInterval(() => {
+							$("#sl-time").text(parseInt($("#sl-time").text())+1);
+						}, 1000);
+						clickThis($(this));
+					}else{
+						clickThis($(this));
+					}
+				})
+				$(".saolei .box div").bind("contextmenu", function(){
+					if(jieshu){
+						if($(this).hasClass("bj")){
+							$(this).removeClass("bj").addClass("yw").html('<i class="iconfont icon-wenhao"></i>');
+						}else if($(this).hasClass("yw")){
+							$(this).removeClass("yw").html('');
+						}else if(!$(this).hasClass("cl")){
+							$(this).addClass("bj").html('<i class="iconfont icon-qizhi"></i>');
+							$(".saolei .title #sl-data").html(lei - $(".saolei .box .bj").length);
+						}
+					}else{
+						//-------------
+					}
+					return false;
+				});
+			}
+			strGame();
+			$("#sl-click").click(function(){
+				strGame();
+				$(".saolei .show").hide();
+				$("#sl-time").text(0);
+			});
+		</script>
+	</div>
+</div>
+        </div>
+    </div>
+    <div class="rightcopy">我是谁并不重要_ © · 2016 - 2019 Power by <a href="https://goverlyr.github.io/" target="_blank">GoverLyr</a></div>
+</div>
+<script src="/js/script.js"></script>
+</body>
+</html>
