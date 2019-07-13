@@ -71,7 +71,7 @@
       },
       methods: {
         getAllList() { // 获取所有的品牌列表 
-          this.$http.post('0.json').then(result => {
+          this.$http.get('0.json').then(result => {
             // 注意： 通过 $http 获取到的数据，都在 result.body 中放着
             var result = result.body
             console.log(result)
