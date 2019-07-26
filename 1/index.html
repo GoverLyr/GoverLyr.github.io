@@ -20,14 +20,14 @@
         var content = document.querySelector('#content');
         var body = document.querySelector('html');
         var navLinks = document.querySelectorAll('nav a');
-        var currentPage = '0';
+        var currentPage = '0.md';
         var currentHash = '';
         var renderedPage = '';
 
         function hashChange() {
             var hash = location.hash.slice(1);
             if (!hash) {
-                hash = '0';
+                hash = '0.md';
             }
 
             var uri = hash.split('#');
